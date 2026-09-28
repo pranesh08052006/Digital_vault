@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment and Secrets
+.env
+*.env
+backend/data/tokens.json
+tokens.json
+credentials.json
+keystore/
+*.jks
+*.keystore
+
+# Build Outputs & Binaries
+cloudflared.exe
+*.exe
+*.apk
+*.aab
+dist/
+android-build/
+build-apk/
+backup-phase1/
+release/
+
+# Logs & System
+*.log
+.DS_Store
+Thumbs.db

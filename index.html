@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Digital Memory Vault - Store, Organize, Access</title>
+  <meta name="description" content="Your memories, your data, your world — all in one secure place. Photos, emails, files, events, notes and places always with you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand-container">
+        <div class="logo-wrapper">
+          <svg class="brand-logo" viewBox="0 0 48 48" width="44" height="44" fill="none">
+            <defs>
+              <linearGradient id="v-shield-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f172a"/>
+                <stop offset="60%" stop-color="#090d1a"/>
+                <stop offset="100%" stop-color="#020617"/>
+              </linearGradient>
+              <linearGradient id="v-accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00f2fe"/>
+                <stop offset="50%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+              <linearGradient id="v-glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#00f2fe"/>
+              </linearGradient>
+              <filter id="v-core-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+            </defs>
+            <rect x="2.5" y="2.5" width="43" height="43" rx="13" fill="url(#v-shield-bg)" stroke="url(#v-accent-grad)" stroke-width="1.8"/>
+            <rect x="4" y="4" width="40" height="40" rx="11.5" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <circle cx="24" cy="24" r="14.5" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" stroke-dasharray="3.5 2.5"/>
+            <circle cx="24" cy="24" r="11" fill="rgba(15, 23, 42, 0.95)" stroke="url(#v-accent-grad)" stroke-width="1.6"/>
+            <path d="M19 25.5a3 3 0 0 1 5.8-1 2.5 2.5 0 0 1 4.2 2 2.5 2.5 0 0 1-2.5 2.5h-7a2.5 2.5 0 0 1-.5-3.5z" fill="url(#v-glow-grad)" filter="url(#v-core-shadow)"/>
+            <circle cx="24" cy="24" r="4.2" fill="#070c18" stroke="#00f2fe" stroke-width="1.2"/>
+            <circle cx="24" cy="24" r="1.7" fill="#00f2fe"/>
+            <circle cx="7.5" cy="7.5" r="1.3" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="40.5" cy="7.5" r="1.3" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="7.5" cy="40.5" r="1.3" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="40.5" cy="40.5" r="1.3" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+          <div class="logo-glow"></div>
+        </div>
+        <div class="brand-titles">
+          <h1 class="brand-name">Digital <span class="gradient-text">Memory</span> Vault</h1>
+          <p class="brand-tagline">Store • Organize • Access • Anytime, Anywhere</p>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <!-- Notifications & Theme Dropdown Wrapper -->
+        <div class="notification-dropdown-wrapper" id="notification-dropdown-wrapper">
+          <button class="icon-btn bell-btn" id="notifications-btn" title="Notifications & Theme" aria-label="Notifications & Theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge"></span>
+          </button>
+
+          <!-- Notifications & Theme Popover Menu -->
+          <div class="notification-dropdown" id="notification-dropdown">
+            <div class="notification-dropdown-header">
+              <span class="notification-title">Notifications & Theme</span>
+              <span class="notification-status-chip">Active</span>
+            </div>
+
+            <!-- Theme Appearance Option -->
+            <div class="theme-selector-box">
+              <div class="theme-selector-label">
+                <span>Theme Appearance</span>
+                <span class="current-theme-name" id="current-theme-name">Dark</span>
+              </div>
+              <div class="theme-toggle-group">
+                <button type="button" class="theme-option-btn" id="theme-light-btn" data-theme="light">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                  <span>Light</span>
+                </button>
+                <button type="button" class="theme-option-btn active" id="theme-dark-btn" data-theme="dark">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <span>Dark</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="notification-dropdown-divider"></div>
+
+            <!-- Recent Notification Item -->
+            <div class="notification-list">
+              <div class="notification-item">
+                <div class="notification-dot"></div>
+                <div class="notification-item-content">
+                  <div class="notification-item-text">Digital Memory Vault connected & operational.</div>
+                  <div class="notification-item-time">System alert • Just now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Button & Dropdown containing Connect to Google -->
+        <div class="profile-dropdown-wrapper" id="profile-dropdown-wrapper">
+          <button class="icon-btn profile-btn" id="profile-btn" title="User Profile" aria-label="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="profile-status-indicator" id="profile-status-indicator"></span>
+          </button>
+
+          <!-- Profile Dropdown Menu -->
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <div class="profile-avatar-circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="profile-info">
+                <div class="profile-name">Vault Account</div>
+                <div class="profile-email" id="profile-user-email">Not connected</div>
+              </div>
+            </div>
+
+            <div class="profile-dropdown-divider"></div>
+
+            <div class="profile-dropdown-content">
+              <!-- Google OAuth Connection Button inside Profile -->
+              <button class="connect-google-btn profile-google-btn" id="connect-google-btn" title="Connect Google Account">
+                <svg class="g-icon" width="16" height="16" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span id="google-btn-text">Connect Account</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="main-content">
+
+      <!-- TAB 1: HOME TAB -->
+      <div class="tab-view active" id="tab-home">
+        
+        <!-- SECURITY BANNER -->
+        <section class="security-banner">
+          <div class="security-banner-text">
+            <p class="quote-primary">“Your memories, your data, your world — all in one secure place.”</p>
+            <p class="quote-secondary">Photos, emails, files, events, notes and places — always with you.</p>
+          </div>
+          <div class="security-badge">
+            <div class="shield-icon-wrapper">
+              <svg class="shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shield-grad)"/>
+                <path d="M12 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="#ffffff"/>
+                <path d="M12 11v3" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00f2fe"/>
+                    <stop offset="100%" stop-color="#4facfe"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="badge-text">
+              <span>Safe</span>
+              <span>Secure</span>
+              <span>Yours</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- HERO GUIDE BANNER -->
+        <section class="hero-guide-card">
+          <div class="hero-content">
+            <h2 class="hero-title">Learn how <br><span class="hero-highlight">this app</span> works</h2>
+            <p class="hero-description">A simple guide to connect, backup and manage your data.</p>
+            <button class="watch-guide-btn" id="open-guide-btn">
+              <span>Watch Guide</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="hero-visual">
+            <span class="easy-steps-tag">Easy Steps</span>
+            <div class="illustration-wrapper">
+              <img src="assets/hero_guide.jpg" alt="Guide Illustration" class="guide-img">
+              <div class="bulb-glow"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEARCH AND EDIT BAR -->
+        <section class="search-edit-bar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="memory-search" placeholder="Search your memories..." autocomplete="off">
+            <button class="filter-btn" id="filter-btn" title="Filter" aria-label="Filter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+            </button>
+          </div>
+
+          <button class="edit-btn" id="edit-mode-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Edit</span>
+          </button>
+        </section>
+
+        <!-- SEARCH LOADING STATUS INDICATOR -->
+        <div class="search-loading-bar" id="search-loading-bar" style="display: none;">
+          <div class="spinner-small"></div>
+          <span>Searching your connected Google services...</span>
+        </div>
+
+        <!-- CIRCULAR APP QUICK ICONS ROW -->
+        <section class="quick-apps-row">
+          <button class="app-icon-item" data-category="photos" id="quick-app-photos" title="Google Photos">
+            <div class="icon-circle photos-circle">
+              <!-- Google Photos Canonical Pinwheel SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path fill="#EA4335" d="M12 12V3a4.5 4.5 0 0 0 0 9z"/>
+                <path fill="#4285F4" d="M12 12h9a4.5 4.5 0 0 0-9 0z"/>
+                <path fill="#34A853" d="M12 12v9a4.5 4.5 0 0 0 0-9z"/>
+                <path fill="#FBBC05" d="M12 12H3a4.5 4.5 0 0 0 9 0z"/>
+              </svg>
+            </div>
+            <span class="app-label">Photos</span>
+          </button>
+
+          <button class="app-icon-item" data-category="gmail" id="quick-app-gmail" title="Gmail">
+            <div class="icon-circle gmail-circle">
+              <!-- Gmail Canonical Workspace M SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path fill="#4285F4" d="M4 19.5h3.5v-8.8L2 6.6V17.5A2 2 0 0 0 4 19.5z"/>
+                <path fill="#34A853" d="M20 19.5a2 2 0 0 0 2-2V6.6l-5.5 4.1v8.8H20z"/>
+                <path fill="#EA4335" d="M16.5 10.7L12 7.3 7.5 10.7V5.5A1.5 1.5 0 0 1 9.8 4.3L12 6l2.2-1.7A1.5 1.5 0 0 1 16.5 5.5v5.2z"/>
+                <path fill="#FBBC05" d="M2 6.6L7.5 10.7V5.5L2 6.6z"/>
+                <path fill="#C5221F" d="M16.5 5.5v5.2l5.5-4.1-5.5-1.1z"/>
+              </svg>
+            </div>
+            <span class="app-label">Gmail</span>
+          </button>
+
+          <button class="app-icon-item" data-category="drive" id="quick-app-drive" title="Google Drive">
+            <div class="icon-circle drive-circle">
+              <!-- Google Drive Canonical Vector SVG -->
+              <svg width="26" height="26" viewBox="0 0 87.3 78" fill="none">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.45z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.35-1.2 2.9-1.2 4.45h27.45z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 10.15z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.45-1.2h-18.6c-1.55 0-3.1.4-4.45 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.45 1.2h50.9c1.55 0 3.1-.4 4.45-1.2z" fill="#ffba00"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.45z" fill="#2684fc"/>
+              </svg>
+            </div>
+            <span class="app-label">Drive</span>
+          </button>
+
+          <button class="app-icon-item" data-category="calendar" id="quick-app-calendar" title="Google Calendar">
+            <div class="icon-circle calendar-circle">
+              <!-- Google Calendar Canonical Vector SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <rect x="2.5" y="3.5" width="19" height="17" rx="3.5" fill="#FFFFFF"/>
+                <path d="M6 3.5h12a3.5 3.5 0 0 1 3.5 3.5v2.2H2.5V7A3.5 3.5 0 0 1 6 3.5z" fill="#4285F4"/>
+                <circle cx="7" cy="5.8" r="0.9" fill="#FFFFFF"/>
+                <circle cx="17" cy="5.8" r="0.9" fill="#FFFFFF"/>
+                <text x="12" y="16.8" font-family="'Inter', system-ui, sans-serif" font-size="8.8" font-weight="800" fill="#1A73E8" text-anchor="middle" class="live-cal-day">31</text>
+                <path d="M18 20.5h3.5v-3.5L18 20.5z" fill="#EA4335"/>
+                <rect x="2.5" y="17.2" width="3.5" height="3.3" fill="#34A853"/>
+                <rect x="6" y="19" width="12" height="1.5" fill="#FBBC05"/>
+              </svg>
+            </div>
+            <span class="app-label">Calendar</span>
+          </button>
+
+          <button class="app-icon-item" data-category="notes" id="quick-app-notes" title="Notes (Google Keep)">
+            <div class="icon-circle notes-circle">
+              <!-- Google Keep Canonical SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="4.5" fill="#FBBC04"/>
+                <path d="M12 5.8a4 4 0 0 0-2.8 6.9c.5.5.8 1.1.8 1.8h4c0-.7.3-1.3.8-1.8A4 4 0 0 0 12 5.8z" fill="#FFFFFF"/>
+                <rect x="10.1" y="15.2" width="3.8" height="1.1" rx="0.55" fill="#FFFFFF"/>
+                <rect x="10.8" y="16.9" width="2.4" height="0.9" rx="0.45" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <span class="app-label">Notes</span>
+          </button>
+
+          <button class="app-icon-item" data-category="maps" id="quick-app-maps" title="Google Maps / Places">
+            <div class="icon-circle maps-circle">
+              <!-- Google Maps Canonical SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 2.2.8 4.2 2.2 5.7L12 9V2z" fill="#FBBC04"/>
+                <path d="M12 9l-4.8 5.7C8.6 16.2 10.2 18.5 12 22V9z" fill="#34A853"/>
+                <path d="M12 9v13c1.8-3.5 3.4-5.8 4.8-7.3L12 9z" fill="#4285F4"/>
+                <circle cx="12" cy="8.5" r="2.8" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <span class="app-label">Maps</span>
+          </button>
+        </section>
+
+        <!-- GLOBAL EMPTY STATE (Shown only when zero results match across ALL connected services) -->
+        <div class="global-empty-state" id="global-empty-state" style="display: none;">
+          <div class="empty-icon-glow">🔍</div>
+          <h3 class="empty-title">Nothing related was found</h3>
+          <p class="empty-subtitle">We couldn't find anything related to <strong id="empty-query-text">""</strong> in your connected Google services.</p>
+        </div>
+
+        <!-- SEARCH RESULTS ACTION & PDF EXPORT BAR -->
+        <div class="search-export-bar" id="search-export-bar" style="display: none;">
+          <div class="search-summary-info">
+            <span class="search-summary-query" id="search-summary-query">"Goa"</span>
+            <span class="search-summary-badge" id="search-summary-badge">8 memories extracted</span>
+          </div>
+          <button class="download-pdf-btn" id="download-search-pdf-btn" title="Extract and download all search data as a clean PDF document">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Data PDF</span>
+          </button>
+        </div>
+
+        <!-- FEATURED MEMORY CARDS GRID -->
+        <section class="cards-grid" id="cards-grid">
+          
+          <!-- CARD 1: PHOTOS -->
+          <div class="memory-card" data-category="photos" id="card-photos">
+            <div class="card-header">
+              <div class="card-app-icon photos-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path fill="#EA4335" d="M12 12V3a4.5 4.5 0 0 0 0 9z"/>
+                  <path fill="#4285F4" d="M12 12h9a4.5 4.5 0 0 0-9 0z"/>
+                  <path fill="#34A853" d="M12 12v9a4.5 4.5 0 0 0 0-9z"/>
+                  <path fill="#FBBC05" d="M12 12H3a4.5 4.5 0 0 0 9 0z"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Google Photos</h3>
+            <p class="card-desc" id="photos-card-desc">View and search your Google Photos media.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span id="photos-count-text">0 items</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic element right bottom -->
+            <div class="card-3d-graphic photo-graphic">
+              <div class="photo-frame stack-2"></div>
+              <div class="photo-frame stack-1">
+                <div class="photo-inner-art">
+                  <div class="sun"></div>
+                  <div class="mountains"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: GMAIL -->
+          <div class="memory-card" data-category="gmail" id="card-gmail">
+            <div class="card-header">
+              <div class="card-app-icon gmail-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path fill="#4285F4" d="M4 19.5h3.5v-8.8L2 6.6V17.5A2 2 0 0 0 4 19.5z"/>
+                  <path fill="#34A853" d="M20 19.5a2 2 0 0 0 2-2V6.6l-5.5 4.1v8.8H20z"/>
+                  <path fill="#EA4335" d="M16.5 10.7L12 7.3 7.5 10.7V5.5A1.5 1.5 0 0 1 9.8 4.3L12 6l2.2-1.7A1.5 1.5 0 0 1 16.5 5.5v5.2z"/>
+                  <path fill="#FBBC05" d="M2 6.6L7.5 10.7V5.5L2 6.6z"/>
+                  <path fill="#C5221F" d="M16.5 5.5v5.2l5.5-4.1-5.5-1.1z"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Gmail</h3>
+            <p class="card-desc" id="gmail-card-desc">Access your emails and important attachments.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span id="gmail-count-text">0 emails</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic envelope element -->
+            <div class="card-3d-graphic gmail-graphic">
+              <div class="envelope-3d">
+                <div class="env-back"></div>
+                <div class="env-paper"></div>
+                <div class="env-front"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: DRIVE -->
+          <div class="memory-card" data-category="drive" id="card-drive">
+            <div class="card-header">
+              <div class="card-app-icon drive-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 87.3 78" fill="none">
+                  <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.45z" fill="#0066da"/>
+                  <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.35-1.2 2.9-1.2 4.45h27.45z" fill="#00ac47"/>
+                  <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 10.15z" fill="#ea4335"/>
+                  <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.45-1.2h-18.6c-1.55 0-3.1.4-4.45 1.2z" fill="#00832d"/>
+                  <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.45 1.2h50.9c1.55 0 3.1-.4 4.45-1.2z" fill="#ffba00"/>
+                  <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.45z" fill="#2684fc"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Google Drive</h3>
+            <p class="card-desc" id="drive-card-desc">Search your cloud documents and files.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                <span id="drive-count-text">0 files</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic Map Tile element -->
+            <div class="card-3d-graphic maps-graphic">
+              <div class="map-tile-3d">
+                <div class="map-road-1"></div>
+                <div class="map-road-2"></div>
+                <div class="map-pin-3d"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: CALENDAR -->
+          <div class="memory-card" data-category="calendar" id="card-calendar">
+            <div class="card-header">
+              <div class="card-app-icon calendar-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <rect x="2.5" y="3.5" width="19" height="17" rx="3.5" fill="#FFFFFF"/>
+                  <path d="M6 3.5h12a3.5 3.5 0 0 1 3.5 3.5v2.2H2.5V7A3.5 3.5 0 0 1 6 3.5z" fill="#4285F4"/>
+                  <circle cx="7" cy="5.8" r="0.9" fill="#FFFFFF"/>
+                  <circle cx="17" cy="5.8" r="0.9" fill="#FFFFFF"/>
+                  <text x="12" y="16.8" font-family="'Inter', system-ui, sans-serif" font-size="8.8" font-weight="800" fill="#1A73E8" text-anchor="middle" class="live-cal-day">31</text>
+                  <path d="M18 20.5h3.5v-3.5L18 20.5z" fill="#EA4335"/>
+                  <rect x="2.5" y="17.2" width="3.5" height="3.3" fill="#34A853"/>
+                  <rect x="6" y="19" width="12" height="1.5" fill="#FBBC05"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Google Calendar</h3>
+            <p class="card-desc" id="calendar-card-desc">Keep track of your events and reminders.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span id="calendar-count-text">0 events</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic Calendar element -->
+            <div class="card-3d-graphic calendar-graphic">
+              <div class="calendar-block-3d">
+                <div class="cal-rings">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="clock-badge-3d">
+                  <div class="clock-hands"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5: NOTES -->
+          <div class="memory-card" data-category="notes" id="card-notes">
+            <div class="card-header">
+              <div class="card-app-icon notes-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="4.5" fill="#FBBC04"/>
+                  <path d="M12 5.8a4 4 0 0 0-2.8 6.9c.5.5.8 1.1.8 1.8h4c0-.7.3-1.3.8-1.8A4 4 0 0 0 12 5.8z" fill="#FFFFFF"/>
+                  <rect x="10.1" y="15.2" width="3.8" height="1.1" rx="0.55" fill="#FFFFFF"/>
+                  <rect x="10.8" y="16.9" width="2.4" height="0.9" rx="0.45" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Google Keep</h3>
+            <p class="card-desc" id="notes-card-desc">Google Keep access isn't available for personal Google accounts.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                <span id="notes-count-text">Not Available</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic Notes Notepad element -->
+            <div class="card-3d-graphic notes-graphic">
+              <div class="notes-pad-3d">
+                <div class="notes-line-1"></div>
+                <div class="notes-line-2"></div>
+                <div class="notes-corner-3d"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 6: GOOGLE MAPS -->
+          <div class="memory-card" data-category="maps" id="card-maps">
+            <div class="card-header">
+              <div class="card-app-icon maps-mini-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 2.2.8 4.2 2.2 5.7L12 9V2z" fill="#FBBC04"/>
+                  <path d="M12 9l-4.8 5.7C8.6 16.2 10.2 18.5 12 22V9z" fill="#34A853"/>
+                  <path d="M12 9v13c1.8-3.5 3.4-5.8 4.8-7.3L12 9z" fill="#4285F4"/>
+                  <circle cx="12" cy="8.5" r="2.8" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <button class="more-options-btn" title="Options" aria-label="Options">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <circle cx="12" cy="12" r="2.2"/>
+                  <circle cx="12" cy="19" r="2.2"/>
+                </svg>
+              </button>
+            </div>
+            
+            <h3 class="card-title">Google Maps</h3>
+            <p class="card-desc" id="maps-card-desc">Location resolution for your analyzed memories.</p>
+
+            <div class="card-footer">
+              <div class="count-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span id="maps-count-text">0 locations</span>
+              </div>
+            </div>
+
+            <!-- 3D Graphic Map Tile element -->
+            <div class="card-3d-graphic maps-graphic">
+              <div class="map-tile-3d">
+                <div class="map-road-1"></div>
+                <div class="map-road-2"></div>
+                <div class="map-pin-3d"></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </div> <!-- END HOME TAB -->
+
+      <!-- TAB 2: PROGRESS TAB -->
+      <div class="tab-view" id="tab-progress">
+        <div class="view-header">
+          <h2>Storage & Backup Progress</h2>
+          <p>Real-time synchronization metrics and cloud backup status</p>
+        </div>
+
+        <div class="progress-stats-container">
+          <div class="stat-card storage-gauge-card">
+            <h3>Vault Capacity</h3>
+            <div class="gauge-circle">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle" stroke-dasharray="64.2, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <text x="18" y="20.35" class="percentage">64.2%</text>
+              </svg>
+            </div>
+            <p class="stat-desc">Connected Google Services Active</p>
+          </div>
+
+          <div class="stat-card category-breakdown-card">
+            <h3>Connected Services Health</h3>
+            <div class="progress-bar-group">
+              <div class="bar-item">
+                <div class="bar-label"><span>Gmail API</span><span id="health-gmail">Connected</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #4285f4, #00f2fe);"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Google Drive API</span><span id="health-drive">Connected</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #34a853, #10b981);"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Google Photos API</span><span id="health-photos">Connected</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #ea4335, #ff6b5b);"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Google Calendar API</span><span id="health-calendar">Connected</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #fbbc05, #f59e0b);"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Google Maps / Places</span><span id="health-maps">Ready</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #059669, #10b981);"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Vault Notes</span><span id="health-notes" style="color:#34d399;">Active</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXTRACTED DATA ARCHIVES & CREATED REPORTS SECTION INSIDE PROGRESS -->
+        <div class="progress-archives-section">
+          <div class="section-header-row">
+            <div>
+              <h3>📑 Extracted Data Archives & PDF Reports</h3>
+              <p>Persistent archives of extracted memories generated from your universal searches</p>
+            </div>
+            <button class="clear-reports-btn" id="clear-all-reports-btn" title="Clear all saved reports">Clear All</button>
+          </div>
+
+          <!-- Progress Archives Metrics -->
+          <div class="archive-metrics-row">
+            <div class="archive-metric-card">
+              <span class="metric-num" id="total-reports-count">0</span>
+              <span class="metric-label">Created Reports</span>
+            </div>
+            <div class="archive-metric-card">
+              <span class="metric-num" id="total-extracted-items">0</span>
+              <span class="metric-label">Data Items Extracted</span>
+            </div>
+            <div class="archive-metric-card">
+              <span class="metric-num" id="last-export-time">None</span>
+              <span class="metric-label">Last Export</span>
+            </div>
+          </div>
+
+          <!-- Reports List Container -->
+          <div class="reports-list-container" id="reports-list-container">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+      </div> <!-- END PROGRESS TAB -->
+
+      <!-- TAB 3: HISTORY TAB -->
+      <div class="tab-view" id="tab-history">
+        <div class="view-header">
+          <h2>Activity History</h2>
+          <p>Chronological audit log of memory syncs and vault searches</p>
+        </div>
+
+        <div class="timeline-container" id="history-timeline">
+          <div class="timeline-item">
+            <div class="timeline-badge gmail-badge"></div>
+            <div class="timeline-content">
+              <h4>Phase 1 Backend Initialized</h4>
+              <p>Google OAuth 2.0 & Universal Search Service Active.</p>
+              <span class="timeline-time">Just now</span>
+            </div>
+          </div>
+        </div>
+      </div> <!-- END HISTORY TAB -->
+
+      <!-- TAB 4: MENU TAB -->
+      <div class="tab-view" id="tab-menu">
+        <div class="view-header">
+          <h2>Vault Settings & Menu</h2>
+          <p>Configure account security, sync options and Google connection</p>
+        </div>
+
+        <div class="menu-list">
+          <div class="menu-card">
+            <div class="menu-card-title">🔐 Google Account Status</div>
+            <p id="menu-account-email">Not connected</p>
+            <button class="sec-btn" id="menu-auth-btn">Connect Google Account</button>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-title">🌐 Backend Server Connection</div>
+            <p id="menu-server-status" style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Auto-detected</p>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="menu-server-input" placeholder="https://YOUR_BACKEND_URL" style="flex: 1; padding: 8px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: #fff; font-size: 12px;">
+              <button class="sec-btn" id="menu-server-save-btn" style="white-space: nowrap;">Save</button>
+            </div>
+            <p style="font-size: 10px; color: #64748b; margin-top: 6px;">Configure your backend HTTPS URL (e.g. <code>https://YOUR_BACKEND_URL</code>) or leave blank for auto-detected build defaults.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-title">🛠️ Developer / Demo Mode</div>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">Explore all vault features locally without signing into Google:</p>
+            <button class="sec-btn" id="dev-sandbox-btn">Activate Sandbox Demo Mode</button>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-title">🔄 Universal Search Rate Limiting</div>
+            <p>Protected by 100 req/15min API rate limiter</p>
+          </div>
+        </div>
+      </div> <!-- END MENU TAB -->
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION BAR (Exact 4 items matching screenshot) -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-tab="tab-home">
+        <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="nav-label">Home</span>
+      </button>
+
+      <button class="nav-item" data-tab="tab-progress">
+        <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span class="nav-label">Progress</span>
+      </button>
+
+      <button class="nav-item" data-tab="tab-history">
+        <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span class="nav-label">History</span>
+      </button>
+
+      <button class="nav-item" data-tab="tab-menu">
+        <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span class="nav-label">Menu</span>
+      </button>
+    </nav>
+
+    <!-- MODAL: WATCH GUIDE -->
+    <div class="modal-overlay" id="guide-modal">
+      <div class="modal-card">
+        <button class="modal-close" id="close-guide-btn">&times;</button>
+        <div class="guide-slideshow">
+          <div class="guide-slide active" data-step="1">
+            <div class="slide-icon">🔐</div>
+            <h3>Step 1: Connect Google Account</h3>
+            <p>Click "Connect Account" to pair your Google Account with read-only API access.</p>
+          </div>
+          <div class="guide-slide" data-step="2">
+            <div class="slide-icon">⚡</div>
+            <h3>Step 2: Universal Search Bar</h3>
+            <p>Type any keyword (e.g. "Amazon") to query Gmail, Drive, Photos, and Calendar simultaneously.</p>
+          </div>
+          <div class="guide-slide" data-step="3">
+            <div class="slide-icon">🔍</div>
+            <h3>Step 3: Organized Source Cards</h3>
+            <p>View normalized search results under their respective app cards in real time.</p>
+          </div>
+          <div class="guide-slide" data-step="4">
+            <div class="slide-icon">🛡️</div>
+            <h3>Step 4: Privacy First</h3>
+            <p>Your search results are never stored permanently in any external database.</p>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="guide-nav-btn" id="prev-step-btn" disabled>Previous</button>
+          <div class="step-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <button class="guide-nav-btn primary" id="next-step-btn">Next Step</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: CATEGORY DETAILS -->
+    <div class="modal-overlay" id="category-modal">
+      <div class="modal-card category-modal-card">
+        <button class="modal-close" id="close-category-btn">&times;</button>
+        <div class="modal-header-info">
+          <span class="modal-badge-icon" id="cat-modal-icon"></span>
+          <h2 id="cat-modal-title">Photos Vault</h2>
+        </div>
+        <div class="cat-modal-body" id="cat-modal-body">
+          <!-- Dynamic content rendered by app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

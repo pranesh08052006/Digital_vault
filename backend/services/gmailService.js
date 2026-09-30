@@ -90,6 +90,9 @@ class GmailService {
           if (foundMessageMap.size >= maxResults) break;
         } catch (qErr) {
           console.warn(`[GmailService] Query attempt "${qStr}" note:`, qErr.message);
+          if (qErr.message && (qErr.message.includes('invalid_grant') || qErr.code === 401)) {
+            throw qErr;
+          }
         }
       }
 

@@ -82,6 +82,13 @@ class CalendarService {
         })
       ]);
 
+      if (searchRes.status === 'rejected' && searchRes.reason?.message?.includes('invalid_grant')) {
+        throw searchRes.reason;
+      }
+      if (listRes.status === 'rejected' && listRes.reason?.message?.includes('invalid_grant')) {
+        throw listRes.reason;
+      }
+
       const candidateEvents = [
         ...(searchRes.status === 'fulfilled' ? (searchRes.value.data.items || []) : []),
         ...(listRes.status === 'fulfilled' ? (listRes.value.data.items || []) : [])

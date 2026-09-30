@@ -3,13 +3,13 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI } = require(
 const tokenStore = require('../services/tokenStore');
 
 function getEffectiveRedirectUri(req) {
+  if (process.env.GOOGLE_REDIRECT_URI && process.env.GOOGLE_REDIRECT_URI.trim()) {
+    return process.env.GOOGLE_REDIRECT_URI.trim();
+  }
   const host = req.get('host') || '';
   const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : (req.protocol || 'http');
   if (host.includes('localhost') || host.includes('127.0.0.1')) {
     return `http://localhost:3000/api/auth/google/callback`;
-  }
-  if (process.env.GOOGLE_REDIRECT_URI) {
-    return process.env.GOOGLE_REDIRECT_URI;
   }
   return `${protocol}://${host}/api/auth/google/callback`;
 }

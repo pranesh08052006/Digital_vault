@@ -36,6 +36,24 @@ class SearchService {
       notesService.searchNotes(sanitizedQuery, userEmail)
     ]);
 
+    // Check if Google OAuth token has expired (invalid_grant)
+    const isInvalidGrant = [gmailRes, driveRes, photosRes, calendarRes].some(
+      r => r.status === 'rejected' && (
+        (r.reason?.message && r.reason.message.includes('invalid_grant')) ||
+        (r.reason?.response?.data?.error === 'invalid_grant')
+      )
+    );
+
+    if (isInvalidGrant) {
+      console.warn('⚠️ [SearchService] Google OAuth token expired or revoked (invalid_grant). Clearing stored session.');
+      const tokenStore = require('./tokenStore');
+      tokenStore.clearSession();
+      const err = new Error('Your Google Account session has expired. Please connect your Google Account again.');
+      err.code = 'INVALID_GRANT';
+      err.status = 401;
+      throw err;
+    }
+
     const results = {
       gmail: [],
       drive: [],

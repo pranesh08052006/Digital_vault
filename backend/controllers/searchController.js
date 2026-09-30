@@ -21,6 +21,18 @@ class SearchController {
 
       res.json(searchResult);
     } catch (err) {
+      if (err.status === 401 || err.code === 'INVALID_GRANT' || (err.message && err.message.includes('invalid_grant'))) {
+        if (req.session) {
+          delete req.session.tokens;
+          delete req.session.user;
+        }
+        return res.status(401).json({
+          connected: false,
+          error: 'invalid_grant',
+          message: 'Your Google Account session has expired. Please connect your Google Account again.'
+        });
+      }
+
       console.error('Unhandled Search Controller Error:', err);
       res.status(500).json({
         error: 'An internal server error occurred while executing the search.'

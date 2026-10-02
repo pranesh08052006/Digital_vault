@@ -5,16 +5,22 @@ class GoogleAuthService {
   /**
    * Generates the Google OAuth 2.0 authorization URL
    */
-  getAuthUrl(redirectUri) {
+  getAuthUrl(redirectUri, state) {
     const oauth2Client = createOAuth2Client(redirectUri);
 
     console.log('Google Client ID loaded:', process.env.GOOGLE_CLIENT_ID);
 
-    return oauth2Client.generateAuthUrl({
+    const authOptions = {
       access_type: 'offline',
       scope: SCOPES,
       prompt: 'consent'
-    });
+    };
+
+    if (state && typeof state === 'string') {
+      authOptions.state = state;
+    }
+
+    return oauth2Client.generateAuthUrl(authOptions);
   }
 
   /**

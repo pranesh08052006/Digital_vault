@@ -31,7 +31,7 @@ const SCOPES = [
 ];
 
 function createOAuth2Client(redirectUri) {
-  const finalRedirectUri = (redirectUri || GOOGLE_REDIRECT_URI).trim();
+  const finalRedirectUri = (redirectUri || process.env.GOOGLE_REDIRECT_URI || GOOGLE_REDIRECT_URI).trim();
   return new google.auth.OAuth2(
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,

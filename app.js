@@ -4,11 +4,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Auto-purge any stale legacy tunnel URLs from localStorage to prevent invalid sites errors
+  // Auto-purge any stale legacy tunnel or localhost URLs from localStorage to prevent invalid connection errors
   try {
     const legacyUrl = localStorage.getItem('vault_server_url') || '';
-    if (legacyUrl.includes('trycloudflare.com') || legacyUrl.includes('loca.lt') || legacyUrl.includes('ngrok')) {
-      console.log('🧹 Purging expired tunnel URL from localStorage:', legacyUrl);
+    if (legacyUrl.includes('trycloudflare.com') || legacyUrl.includes('loca.lt') || legacyUrl.includes('ngrok') ||
+        (window.location.protocol !== 'file:' && (legacyUrl.includes('localhost') || legacyUrl.includes('127.0.0.1')) && !window.location.hostname.includes('localhost'))) {
+      console.log('🧹 Purging expired server URL from localStorage:', legacyUrl);
       localStorage.removeItem('vault_server_url');
       localStorage.removeItem('vault_custom_server_url');
     }
@@ -240,9 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const googleAuthUrl = getApiUrl('/api/auth/google');
+    const isNativeBridge = Boolean(window.AndroidBridge && window.AndroidBridge.openExternalUrl);
+    const googleAuthUrl = getApiUrl('/api/auth/google' + (isNativeBridge ? '?source=app' : ''));
     if (googleAuthUrl.startsWith('http://') || googleAuthUrl.startsWith('https://')) {
-      if (window.AndroidBridge && window.AndroidBridge.openExternalUrl) {
+      if (isNativeBridge) {
         window.AndroidBridge.openExternalUrl(googleAuthUrl);
       } else {
         window.location.href = googleAuthUrl;

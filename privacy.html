@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Digital Memory Vault</title>
+  <meta name="description" content="Privacy Policy for Digital Memory Vault detailing Google API scope usage, token storage, and data handling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card-bg: #131b2e;
+      --border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-gradient: linear-gradient(135deg, #00f2fe, #3b82f6);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 32px 16px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .header .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .back-link:hover { text-decoration: underline; }
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 28px 0 12px 0;
+    }
+    p, li {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    li { margin-bottom: 8px; }
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 16px 0 24px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 600;
+    }
+    td { color: var(--text-muted); }
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #e2e8f0;
+    }
+    .footer-note {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">&larr; Return to Digital Memory Vault</a>
+    
+    <div class="header">
+      <h1>Privacy Policy & Data Handling</h1>
+      <div class="subtitle">Digital Memory Vault &bull; Last updated: October 2026</div>
+    </div>
+
+    <section>
+      <h2>1. Overview</h2>
+      <p>
+        Digital Memory Vault is a personal productivity and memory search tool. It allows users to connect their Google Account to search across their personal emails, files, photos, and calendar events from a single interface.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Google API Permissions & OAuth Scopes</h2>
+      <p>
+        When you connect your Google Account, Digital Memory Vault requests read-only OAuth scopes to execute user-initiated searches. The application uses the following Google API scopes:
+      </p>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Google API Scope</th>
+              <th>Technical Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>https://www.googleapis.com/auth/gmail.readonly</code></td>
+              <td>Queries Gmail message headers and snippets matching the user's search term.</td>
+            </tr>
+            <tr>
+              <td><code>https://www.googleapis.com/auth/drive.readonly</code></td>
+              <td>Searches Google Drive file names, metadata, and thumbnails matching the user's search term.</td>
+            </tr>
+            <tr>
+              <td><code>https://www.googleapis.com/auth/photoslibrary.readonly</code><br><code>...photoslibrary.readonly.appcreateddata</code><br><code>...photospicker.mediaitems.readonly</code></td>
+              <td>Queries Google Photos items and albums matching the user's search term.</td>
+            </tr>
+            <tr>
+              <td><code>https://www.googleapis.com/auth/calendar.readonly</code></td>
+              <td>Queries Google Calendar event summaries, dates, and descriptions matching the search term.</td>
+            </tr>
+            <tr>
+              <td><code>https://www.googleapis.com/auth/userinfo.profile</code><br><code>https://www.googleapis.com/auth/userinfo.email</code></td>
+              <td>Retrieves the connected account's name, email, and profile avatar to display in the application header.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Where Data is Stored</h2>
+      <ul>
+        <li>
+          <strong>OAuth Tokens:</strong> OAuth 2.0 access and refresh tokens are stored in the server session and persisted in <code>backend/data/tokens.json</code> on the hosting server instance to keep the user signed in.
+        </li>
+        <li>
+          <strong>User Notes:</strong> Notes created manually in the application interface are stored in <code>backend/data/notes.json</code> on the server instance.
+        </li>
+        <li>
+          <strong>Search Results:</strong> Search queries execute in real-time against Google APIs. Search results (email summaries, file titles, photos, event details) are returned directly to the active browser session in memory and are not stored in database files on the server.
+        </li>
+        <li>
+          <strong>Browser Storage:</strong> Browser <code>localStorage</code> is used on the client device to save UI theme preferences, export history, and connection state.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Third-Party Sharing</h2>
+      <p>
+        Digital Memory Vault does not include third-party advertising SDKs, tracking pixels, or third-party analytics scripts. Data retrieved via Google APIs is used strictly within the application interface to present search results and export user-requested reports.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Revocation & Data Disconnection</h2>
+      <p>
+        Users can disconnect their Google Account at any time by clicking "Disconnect Google Account" in the application profile menu. Disconnecting clears the server session, removes stored tokens from <code>backend/data/tokens.json</code>, and calls Google's token revocation endpoint.
+      </p>
+    </section>
+
+    <div class="footer-note">
+      Digital Memory Vault &bull; Open-source personal search &amp; memory vault
+    </div>
+  </div>
+</body>
+</html>
